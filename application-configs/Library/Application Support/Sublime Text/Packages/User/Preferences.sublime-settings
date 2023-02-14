@@ -1,0 +1,8 @@
+{
+	"color_scheme": "Packages/gruvbox/gruvbox (Dark) (Medium).sublime-color-scheme",
+	"ignored_packages":
+	[
+		"Vintage",
+	],
+	"theme": "gruvbox.sublime-theme",
+}
