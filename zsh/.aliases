@@ -1,0 +1,17 @@
+SCRIPTS_DIR="/Users/$USER_PROFILE/.dotfiles/scripts"
+
+# Manjaro Aliases
+alias cp="cp -i"                                                # Confirm before overwriting something
+alias df='df -h'                                                # Human-readable sizes
+alias free='free -m'                                            # Show sizes in MB
+alias gitu='git add . && git commit && git push'
+
+
+# MARK:  --- Aliases ---
+alias compvid="$SCRIPTS_DIR/compressVideo.sh"
+alias ssymb="$SCRIPTS_DIR/symbolicate.sh"
+alias androidss="$SCRIPTS_DIR/androidScreenshots.sh"
+alias gitCleanBranches="git fetch -p && git branch -vv | grep ': gone]' | cut -d' ' -f3 | xargs git branch -D"
+alias gitCleanAllButDev="git branch | grep -v 'dev' | xargs git branch -D"
+alias gcpl="git clean -fd && git checkout . && git fetch && git pull --rebase"
+alias vi="vim"

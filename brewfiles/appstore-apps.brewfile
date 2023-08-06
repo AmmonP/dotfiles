@@ -1,0 +1,6 @@
+mas "Screens 4", id: 1224268771 if system "[[ -e ~/.dotfiles/.brewtemp/.install-utils ]] && [[ -e ~/.dotfiles/.brewtemp/.install-mas ]]"
+mas "PDF Squeezer", id: 1502111349 if system "[[ -e ~/.dotfiles/.brewtemp/.install-utils ]] && [[ -e ~/.dotfiles/.brewtemp/.install-mas ]]"
+
+mas "GoodNotes", id: 1444383602 if system "[[ -e ~/.dotfiles/.brewtemp/.install-productivity ]] && [[ -e ~/.dotfiles/.brewtemp/.install-mas ]]"
+mas "MindNode", id: 1289197285 if system "[[ -e ~/.dotfiles/.brewtemp/.install-productivity ]] && [[ -e ~/.dotfiles/.brewtemp/.install-mas ]]"
+mas "One Thing", id: 1604176982 if system "[[ -e ~/.dotfiles/.brewtemp/.install-productivity ]] && [[ -e ~/.dotfiles/.brewtemp/.install-mas ]]"

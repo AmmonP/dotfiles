@@ -1,0 +1,8 @@
+brew "ffmpeg" 
+brew "stow" 
+brew "mackup" 
+brew "mas"
+brew "vim"
+brew "pyenv"
+brew "volta"
+brew "pipx"
