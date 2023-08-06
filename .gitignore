@@ -68,3 +68,6 @@ zsdoc/data
 
 # Mackups
 com.apple.dt.Xcode.plist
+
+# Brew Scripts
+.brewtemp

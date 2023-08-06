@@ -3,8 +3,17 @@
 set -e
 
 echo "Setting up dotfiles..."
-# Install Plugin Managers
 
+
+# Install brew if not already installed
+if ! command -v brew &> /dev/null; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+else
+    echo "Homebrew is already installed."
+fi
+
+
+# Install Plugin Managers
 if [[ ! -d ~/.zplug ]]; then
 	echo "Installing zplug"
 	curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
@@ -16,62 +25,74 @@ if [[ ! -d ~/.vim/bundle/Vundle.vim ]]; then
 fi
 
 # Install commonly used utilities
-
 echo "Installing command-line tools"
-brew install \
-	ffmpeg \
-	stow \
-	mackup 
+brew bundle --file ~/.dotfiles/brewfiles/utils.brewfile
 
 echo ""
 echo ""
-echo "Would you like to install MacOS apps as well?"
+echo "Would you like to install MacOS apps as well via Brew?"
 echo "Press any 'y' to install or press any other key to skip."
 
 read confirm
 
 if [[ $confirm == "y" || $confirm == "Y" ]]; then
 	echo "Installing MacOS Apps via Brew"
-	brew install \
-		affinity-photo \
-		affinity-designer \
-		affinity-publisher \
-		appcleaner \
-		blender \
-		cyberduck \
-		charles \
-		dbeaver-community \
-		discord \
-		docker \
-		epic-games \
-		firefox \
-		godot \
-		gray \
-		hiddenbar \
-		istat-menus \
-		jetbrains-toolbox \
-		krita \
-		linear-linear \
-		multipass \
-		obsidian \
-		onyx \
-		podman \
-		raycast \
-		rectangle \
-		sim-daltonism \
-		slack \
-		spotify \
-		steam \
-		sublime-merge \
-		sublime-text \
-		the-unarchiver \
-		tunnelblick \
-		visual-studio-code \
-		vlc \
-		xcodes
+	mkdir -p ~/.dotfiles/.brewtemp/
+	
+	echo -n "Install Utilities? " && read confirm
+	if [[ $confirm == "y" || $confirm == "Y"  || $confirm == "" ]]; then
+		touch ~/.dotfiles/.brewtemp/.install-utils
+	fi
+
+	echo -n "Install Browsers? " && read confirm
+	if [[ $confirm == "y" || $confirm == "Y"  || $confirm == "" ]]; then
+		touch ~/.dotfiles/.brewtemp/.install-browsers
+	fi
+
+	echo -n "Install Photo Apps? " && read confirm
+	if [[ $confirm == "y" || $confirm == "Y"  || $confirm == "" ]]; then
+		touch ~/.dotfiles/.brewtemp/.install-photo
+	fi
+
+	echo -n "Install Dev Tools? " && read confirm
+	if [[ $confirm == "y" || $confirm == "Y"  || $confirm == "" ]]; then
+		touch ~/.dotfiles/.brewtemp/.install-devtools
+	fi
+
+	echo -n "Install Gamedev Tools? " && read confirm
+	if [[ $confirm == "y" || $confirm == "Y"  || $confirm == "" ]]; then
+		touch ~/.dotfiles/.brewtemp/.install-gamedev
+	fi
+
+	echo -n "Install Chat Apps? " && read confirm
+	if [[ $confirm == "y" || $confirm == "Y"  || $confirm == "" ]]; then
+		touch ~/.dotfiles/.brewtemp/.install-chat
+	fi
+
+	echo -n "Install Productivyt Apps? " && read confirm
+	if [[ $confirm == "y" || $confirm == "Y"  || $confirm == "" ]]; then
+		touch ~/.dotfiles/.brewtemp/.install-productivity
+	fi
+
+	echo -n "Install Entertainment Apps? " && read confirm
+	if [[ $confirm == "y" || $confirm == "Y"  || $confirm == "" ]]; then
+		touch ~/.dotfiles/.brewtemp/.install-entertainment
+	fi
+
+	echo "Install apps that require the Mac App Store?"
+	echo -n  "You will need to be signed in to the Mac App Store for this to work. "
+	read confirm
+	if [[ $confirm == "y" || $confirm == "Y"  || $confirm == "" ]]; then
+		touch ~/.dotfiles/.brewtemp/.install-mas
+	fi
+
+	brew bundle --file ~/.dotfiles/brewfiles/apps.brewfile || true
+	brew bundle --file ~/.dotfiles/brewfiles/appstore-apps.brewfile || true
 
 	echo "You will need to manually install these apps from the app store or using their latest installer:"
-	echo "Arduino IDE, Davinci Resolve,, GoodNotes, MindNode, One Thing, PDF Squeezer, Parallels Desktop 15, Screens 4, Shottr"
+	echo "Davinci Resolve, Parallels Desktop 15"
+
+	rm -rf ~/.dotfiles/.brewtemp/
 else
 	echo "Skipping app install..."
 fi
@@ -89,18 +110,6 @@ if [[ $confirm == "y" || $confirm == "Y" ]]; then
 	# Checkout settings here:
 	# 	https://github.com/pawelgrzybek/dotfiles/blob/master/setup-macos.sh
 	# 	https://pawelgrzybek.com/change-macos-user-preferences-via-command-line/
-	# Disable natural scroll direction
-
-	#  Currently Bugged
-	# defaults write -globalDomain com.apple.swipescrolldirection 0
-	# defaults write -globalDomain com.apple.trackpad.scaling 1
-
-	# defaults write com.apple.AppleMultitouchTrackpad TrackpadCornerSecondaryClick 2
-	# defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick 2
-	# defaults write com.apple.AppleMultitouchTrackpad TrackpadRightClick 0
-	# defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick 0
-
-	# defaults write -globalDomain AppleInterfaceStyle Dark
 
 	# Setup dock
 	defaults write com.apple.dock minimize-to-application -bool true
@@ -138,6 +147,7 @@ echo "'stow'ing Dotfiles"
 pushd ~/.dotfiles
 stow vim
 stow zsh
+stow git
 stow mackup
 popd
 
