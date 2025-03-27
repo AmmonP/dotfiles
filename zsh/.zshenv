@@ -11,16 +11,3 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 export PATH="$VOLTA_HOME/bin:/Users/$(whoami)/.local/bin:$PATH:/usr/local/bin:/usr/local/Cellar/vim/bin"
 
-source ~/.zplug/init.zsh
-
-# setup pyenv
-eval "PATH="$(bash --norc -ec 'IFS=:; paths=($PATH); 
-for i in ${!paths[@]}; do 
-if [[ ${paths[i]} == "''/Users/$(whoami)/.pyenv/shims''" ]]; then unset '\''paths[i]'\''; 
-fi; done; 
-echo "${paths[*]}"')"
-export PATH="/Users/$(whoami)/.pyenv/shims:${PATH}"
-command pyenv rehash 2>/dev/null"
-
-# Created by `pipx` on 2023-08-30 18:26:48
-export PATH="$PATH:/Users/$(whoami)/.local/bin"

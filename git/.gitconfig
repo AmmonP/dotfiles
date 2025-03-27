@@ -72,6 +72,10 @@
 	# Show the user email for the current repository.
 	whoami = config user.email
 
+	# Clear all branches aside from Main, prune remotes
+	cleanup = "!f() { git checkout main; git branch | grep -v 'main' | xargs git branch -D; git fetch --prune; git pull; }; f"
+
+	remove-untracked = "!f() { git rm -r --cached . && git add . ; }; f"
 [apply]
 
 	# Detect whitespace errors when applying a patch.

@@ -1,0 +1,23 @@
+# MARK: --- Functions ---
+
+function demangle() {
+  local symbol="$1"
+  echo $symbol | c++filt -n
+}
+
+function demangleLines() {
+    local symbols="$1"
+    IFS=$'\n' lines=(${(f)symbols})
+
+    echo "\n\nDEMANGLED:"
+    for line in $lines 
+    do
+        symbol=$(echo $line | ack -o '(?<=\().+(?=\))')
+        if [[ -z $symbol ]]; then
+            symbol=$line
+        fi
+        demangle $symbol
+    done
+
+    IFS=$' \t\n'
+}
